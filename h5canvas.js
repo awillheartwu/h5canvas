@@ -1,14 +1,283 @@
-const http = require('http');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+<!-- saved from url=(0045)http://treeblurb.com/dev_math/sin_canv00.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+        <title>Animated Sine wave using HTML5 canvas</title>
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello jinx\n');
-});
+        <script src="./Animated Sine wave using HTML5 canvas_files/raphael.js" type="text/javascript" charset="utf-8"></script>
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});//test
+<script type="text/javascript" charset="utf-8">
+
+    var s1 = prompt('input number');
+
+    function byid(id)
+    {
+        return document.getElementById(id);
+    }
+
+
+    function path_sin(ctx)
+    {
+        // sine path from 0 to rads radians scales by sx
+
+        var N = 29;
+        var dx=2*(Math.PI)/N;
+        var x=0;
+        var px = 150;
+        var py = 100;
+
+        var p0 = "M"+ px +","+ py;
+
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+
+        for (var i=0;i<N;i++)
+        {
+            x += dx;
+            y = Math.sin(x);
+
+            px += (180.0/(Math.PI))*dx;
+            py = 100 - 50*y;
+
+            ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    function path_sin_1(ctx)
+    {
+        // sine path from 0 to rads radians scales by sx
+
+        var N = 29*s1;
+        var dx=2*(Math.PI)/N;
+        var x=0;
+        var px = 150;
+        var py = 100;
+
+        var p0 = "M"+ px +","+ py;
+
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+
+        for (var i=0;i<N;i++)
+        {
+            x += dx;
+            y = Math.sin(s1*x);
+
+            px += (180.0/(Math.PI))*dx;
+            py = 100 - 50*y;
+
+            ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    function path_circ(ctx, x, y, r)
+    {
+        ctx.beginPath();
+        ctx.arc(x,y,r, 0, Math.PI*2, true);     //arc(x, y, radius, startAngle, endAngle, anticlockwise)
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    function path_line(ctx, x0,y0, x1,y1)
+    {
+        ctx.beginPath();
+
+        ctx.moveTo(x0, y0);
+        ctx.lineTo(x1, y1);
+
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    var ms = 0;
+    var ms1 = 0;
+    var canw, canh;
+
+    function millis()
+    {
+        var d = new Date();
+        return d.getTime();
+    }
+
+    function init()
+    {
+        var canvas = byid('canv');
+        var ctx = canvas.getContext("2d");
+        canw = canvas.width;
+        canh = canvas.height;
+
+        ms = millis();
+        setInterval(function () { draw(ctx);}, 50);             // drawing loop 1/20th second
+    };
+
+    function circ_dot(ctx, t)
+    {
+        var x = 100 + 50*Math.cos(t);
+        var y = 100 - 50*Math.sin(t);
+
+        ctx.fillStyle = "Orange";
+        path_dot(ctx,x,y);
+
+        ctx.strokeStyle = "rgba(  0,255,255,0.5)";
+        ctx.lineWidth = 1.5;
+
+        path_line(ctx, 100,100, x,y);
+        path_line(ctx, x,100, x,y);
+    }
+
+    function circ_dot_1(ctx, t)
+    {
+        var x = 100 + 50*Math.cos(s1*t);
+        var y = 100 - 50*Math.sin(s1*t);
+
+        ctx.fillStyle = "Blue";
+        path_dot(ctx,x,y);
+
+        ctx.strokeStyle = "rgba(  0,255,255,0.5)";
+        ctx.lineWidth = 1.5;
+
+        path_line(ctx, 100,100, x,y);
+        path_line(ctx, x,100, x,y);
+    }
+
+
+    function sine_dot(ctx, t)
+    {
+        var x = 150 + t*180/Math.PI;
+        var y = 100 - 50*Math.sin(t);
+
+        ctx.fillStyle = "Orange";
+        path_dot(ctx,x,y);
+
+        ctx.strokeStyle = "rgba(  0,255,255,0.5)";
+        ctx.lineWidth = 1.5;
+        path_line(ctx, x,100, x,y);
+    }
+
+    function sine_dot_1(ctx, t)
+    {
+        var x = 150 + t*180/Math.PI;
+        var y = 100 - 50*Math.sin(s1*t);
+
+        ctx.fillStyle = "Blue";
+        path_dot(ctx,x,y);
+
+        ctx.strokeStyle = "rgba(  0,255,255,0.5)";
+        ctx.lineWidth = 1.5;
+        path_line(ctx, x,100, x,y);
+    }
+
+    function bounce_dot(ctx, t)
+    {
+        var x = 150 + 0;//t;
+        var y = 100 - 50*Math.sin(t);
+
+        ctx.fillStyle = "Orange";
+        path_dot(ctx,x,y);
+
+        ctx.strokeStyle = "rgba(  0,255,255,0.4)";
+        ctx.lineWidth = 1.5;
+
+        path_line(ctx, 150,100, x,y);
+    }
+
+    function bounce_dot_1(ctx, t)
+    {
+        var x = 150 + 0;//t;
+        var y = 100 - 50*Math.sin(s1*t);
+
+        ctx.fillStyle = "Blue";
+        path_dot(ctx,x,y);
+
+        ctx.strokeStyle = "rgba(  0,255,255,0.4)";
+        ctx.lineWidth = 1.5;
+
+        path_line(ctx, 150,100, x,y);
+    }
+
+    function path_dot(ctx, x,y)
+    {
+        ctx.beginPath();
+        ctx.arc(x,y, 4, 0, Math.PI*2, true);     //arc(x, y, radius, startAngle, endAngle, anticlockwise)
+        ctx.fill();
+        ctx.closePath();
+    }
+
+    var step = 0;
+    var step1 = 0;
+
+    function draw(ctx)
+    {
+        var now = millis();
+        var dT = now-ms;
+
+        step++;
+        if (step>40)
+            step=0;
+
+        var r = (step/40) * 2.0*Math.PI;
+
+        ctx.clearRect(0, 0, canw, canh);
+
+        ctx.fillStyle = "rgba(0,0,0,0)";
+        ctx.strokeStyle = "rgba(255,255,255,0.6)";
+        ctx.lineWidth = 2.5;
+
+        path_sin(ctx);
+        path_sin_1(ctx);
+
+        path_circ(ctx, 100, 100, 50);
+
+        // axes
+
+        ctx.strokeStyle = "LightGreen";
+        ctx.lineWidth = 0.6;
+
+        path_line(ctx, 25,100,513,100);//横线
+        path_line(ctx,100, 25,100,175);
+        path_line(ctx,150, 25,150,175);
+
+        circ_dot(ctx, r);
+        circ_dot_1(ctx, r);
+        bounce_dot(ctx, r);
+        bounce_dot_1(ctx, r);
+        sine_dot(ctx, r);
+        sine_dot_1(ctx, r);
+
+        //console.log("dT = " + dT +" now=" + now +" ms="+ms);
+        ms=now;
+    }
+    function a1(){
+      return document.getElementById("txt").value;
+    }
+
+    window.onload = function () {
+        init();
+    }
+
+</script>
+
+    </head>
+    <body style="color:White; background-color:Black; font-family:sans-serif,Helvetica; width:100%;height:100%">
+
+
+        <canvas id="canv" width="800px" height="500px" style="position:absolute; top:10; left:10;">Canvas Not supported, sorry.</canvas>
+
+
+        <div style="position:relative; left:60;  top:200;">
+            <div style="position:absolute; left:0; top:0; color:Gray;">Rotating circle generates sine wave</div>
+            <div style="position:absolute; left:0; top:20; color:Gray; opacity:0.7;">written in Javascript using HTML5 Canvas drawing</div>
+        </div>
+
+        <div style="position:relative; left:60;  top:250;">
+            <a href="http://quantblog.wordpress.com/tag/math">quantblog.wordpress.com</a>
+        </div>
+        <div style="position:relative; left:60;  top:250;">
+            <li><input type="text" id="txt" /></li>
+        </div>
+
+
+</body></html>
