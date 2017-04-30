@@ -7,13 +7,19 @@
 
 <script type="text/javascript" charset="utf-8">
 
-    var s1 = prompt('input number');
+
 
     function byid(id)
     {
         return document.getElementById(id);
     }
 
+    var s1 = 2;
+
+    function getvalue(){
+      var s1 = byid(input) ;
+      return s1;
+    }
 
     function path_sin(ctx)
     {
@@ -254,6 +260,7 @@
       return document.getElementById("txt").value;
     }
 
+
     window.onload = function () {
         init();
     }
@@ -276,7 +283,7 @@
             <a href="http://quantblog.wordpress.com/tag/math">quantblog.wordpress.com</a>
         </div>
         <div style="position:relative; left:60;  top:250;">
-            <li><input type="text" id="txt" /></li>
+            <li><input type="text" id="input" value="2"/></li>
         </div>
 
 
