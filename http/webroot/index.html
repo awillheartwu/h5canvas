@@ -22,8 +22,8 @@
         return document.getElementById(id);
     }
 
-    function getvalue() {
-        sessionStorage.ss = prompt();
+    function getvalue(id) {
+        sessionStorage.ss = document.getElementById(id).value;
     }
 
     function path_sin(ctx)
@@ -283,7 +283,8 @@
         <div style="position:relative; left:60;  top:250;">
             <a href="http://quantblog.wordpress.com/tag/math">quantblog.wordpress.com</a>
         </div>
-        <input style="position:relative; left:60;  top:250;" type="button" id="bb" value="Change" onclick="getvalue();reload();">
+        <input style="position:relative; left:60;  top:250;" type="input" id="aa"  onchange="getvalue('aa')">
+        <input style="position:relative; left:60;  top:250;" type="button" id="bb" value="Change" onclick="reload();">
 
 
 </body></html>
