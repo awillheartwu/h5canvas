@@ -10,11 +10,11 @@
       sessionStorage.ss = 2;
     }
 
-    var s1 = parseInt(sessionStorage.ss);
+    var s1 = parseInt(sessionStorage.ss);//use storage
 
 
     function reload() {
-      window.location.reload();
+      window.location.reload();//reload canvas
     }
 
     function byid(id)
@@ -283,8 +283,8 @@
         <div style="position:relative; left:60;  top:250;">
             <a href="http://quantblog.wordpress.com/tag/math">quantblog.wordpress.com</a>
         </div>
-        <input style="position:relative; left:60;  top:250;" type="input" id="aa"  onchange="getvalue('aa')">
-        <input style="position:relative; left:60;  top:250;" type="button" id="bb" value="Change" onclick="reload();">
+        <input style="position:relative; left:60;  top:250;" type="input" id="aa" onchange="getvalue('aa')">
+        <button style="position:relative; left:60;  top:250;" id="bb" onclick="reload()">Change it!</button>
 
 
 </body></html>
