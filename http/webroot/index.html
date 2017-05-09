@@ -6,19 +6,24 @@
         <script src="./Animated Sine wave using HTML5 canvas_files/raphael.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" charset="utf-8">
+    if(sessionStorage.ss == null){
+      sessionStorage.ss = 2;
+    }
+
+    var s1 = parseInt(sessionStorage.ss);
 
 
+    function reload() {
+      window.location.reload();
+    }
 
     function byid(id)
     {
         return document.getElementById(id);
     }
 
-    var s1 = 2;
-
-    function getvalue(){
-      var s1 = byid(input) ;
-      return s1;
+    function getvalue() {
+        sessionStorage.ss = prompt();
     }
 
     function path_sin(ctx)
@@ -256,10 +261,6 @@
         //console.log("dT = " + dT +" now=" + now +" ms="+ms);
         ms=now;
     }
-    function a1(){
-      return document.getElementById("txt").value;
-    }
-
 
     window.onload = function () {
         init();
@@ -282,9 +283,7 @@
         <div style="position:relative; left:60;  top:250;">
             <a href="http://quantblog.wordpress.com/tag/math">quantblog.wordpress.com</a>
         </div>
-        <div style="position:relative; left:60;  top:250;">
-            <li><input type="text" id="input" value="2"/></li>
-        </div>
+        <input style="position:relative; left:60;  top:250;" type="button" id="bb" value="Change" onclick="getvalue();reload();">
 
 
 </body></html>
