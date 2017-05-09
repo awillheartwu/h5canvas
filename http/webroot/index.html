@@ -5,14 +5,29 @@
         <script src="./raphael.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" charset="utf-8">
-    if(sessionStorage.ss == null){
+    if(sessionStorage.ss == null)
+    {
       sessionStorage.ss = 2;
     }
+    function my1()
+    {
+      try
+      {
+       var rit = parseFloat(sessionStorage.ss);
+       if(isNaN(rit)) throw "not a number";
+      }
+      catch(err)
+      {
+       alert(err + '!');
+      }
+    }
 
-    var s1 = parseInt(sessionStorage.ss);//use storage
+
+    var s1 = parseFloat(sessionStorage.ss);//use storage
 
 
-    function reload() {
+    function reload()
+    {
       window.location.reload();//reload canvas
     }
 
@@ -270,7 +285,6 @@
     </head>
     <body style="color:White; background-color:Black; font-family:sans-serif,Helvetica; width:100%;height:100%">
 
-
         <canvas id="canv" width="800px" height="500px" style="position:absolute; top:10; left:10;">Canvas Not supported, sorry.</canvas>
 
 
@@ -283,7 +297,7 @@
             <a href="https://github.com/nilaowuge/h5canvas">github.com/nilaowuge/h5canvas</a>
         </div>
         <input style="position:relative; left:60;  top:250;" type="input" id="aa" onchange="getvalue('aa')">
-        <button style="position:relative; left:60;  top:250;" id="bb" onclick="reload()">Change it!</button>
+        <button style="position:relative; left:60;  top:250;" id="bb" onclick="reload();my1();">Change it!</button>
 
 
 </body></html>
